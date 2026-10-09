@@ -198,7 +198,24 @@ setInterval(drawMatrix,55);
 const boot=document.getElementById('boot-screen'),bootPercent=document.getElementById('boot-percent');
 let bootN=0;const bootTimer=setInterval(()=>{bootN=Math.min(100,bootN+Math.ceil(Math.random()*19));bootPercent.textContent=bootN+'%';if(bootN>=100)clearInterval(bootTimer)},180);
 window.addEventListener('load',()=>setTimeout(()=>boot.classList.add('boot-hidden'),1550));
-// Radar stays anchored in the bottom-right corner; no drag handlers.
+// Keep radar pinned to the viewport's bottom-right, independent of page scroll/layout.
+const fixedRadar=document.getElementById('rocket-radar');
+function pinRadar(){
+  if(!fixedRadar)return;
+  fixedRadar.style.setProperty('position','fixed','important');
+  fixedRadar.style.setProperty('right',window.innerWidth<=500?'10px':'16px','important');
+  fixedRadar.style.setProperty('bottom',window.innerWidth<=500?'10px':'16px','important');
+  fixedRadar.style.setProperty('left','auto','important');
+  fixedRadar.style.setProperty('top','auto','important');
+  fixedRadar.style.setProperty('transform','none','important');
+  fixedRadar.style.setProperty('z-index','9998','important');
+  fixedRadar.style.setProperty('pointer-events','none','important');
+  fixedRadar.style.setProperty('width',window.innerWidth<=500?'210px':'280px','important');
+  fixedRadar.style.setProperty('height',window.innerWidth<=500?'210px':'280px','important');
+}
+pinRadar();
+window.addEventListener('resize',pinRadar,{passive:true});
+window.addEventListener('orientationchange',pinRadar,{passive:true});
 // Radar is a fictional visual display; no real objects are tracked.
 
 const jPanel=document.getElementById('jarvis-panel'),jLaunch=document.getElementById('jarvis-launch'),jMessages=document.getElementById('j-messages'),jForm=document.getElementById('j-form'),jInput=document.getElementById('j-input'),jSend=document.getElementById('j-send'),jStatus=document.getElementById('j-status'),jVoice=document.getElementById('j-voice'),jSpeak=document.getElementById('j-speak');
