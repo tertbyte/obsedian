@@ -19,31 +19,6 @@ main{max-width:1240px;margin:auto;padding:18px}.top{display:flex;justify-content
 #rocket-layer{position:fixed;inset:0;pointer-events:none;z-index:2;overflow:hidden}
 
 body:has(#matrix-rain) main{position:relative;z-index:3}
-#rocket-radar{position:fixed;right:22px;bottom:22px;left:auto;top:auto;width:280px;height:280px;border:1px solid #53eaffaa;border-radius:50%;z-index:8;pointer-events:none;cursor:default;touch-action:auto;user-select:none;background:radial-gradient(circle,#06120af5 0%,#020303fa 72%);box-shadow:0 0 32px #53eaff24,inset 0 0 30px #53eaff18;overflow:hidden}
-#rocket-radar:active{cursor:default}#rocket-radar:before{content:"";position:absolute;inset:12%;border:1px solid #53eaff66;border-radius:50%;box-shadow:0 0 0 24px #53eaff0b,0 0 0 48px #53eaff09}
-#rocket-radar:after{content:"";position:absolute;left:50%;top:0;width:1px;height:100%;background:#53eaff45}
-#rocket-radar .radar-ring{position:absolute;inset:29%;border:1px solid #53eaff44;border-radius:50%}
-#rocket-radar .radar-diag{position:absolute;inset:0;background:linear-gradient(45deg,transparent 49.8%,#53eaff2a 50%,transparent 50.2%),linear-gradient(-45deg,transparent 49.8%,#53eaff2a 50%,transparent 50.2%)}
-.radar-cross{position:absolute;left:0;top:50%;width:100%;height:1px;background:#53eaff45}
-.radar-sweep{mix-blend-mode:screen}
-.radar-rocket{font-size:20px}
-.radar-label{top:18px;font-size:10px}
-.radar-coords{bottom:16px;font-size:8px}
-.radar-range{position:absolute;right:18px;top:50%;font-size:7px;color:#53eaff99;letter-spacing:1px}
-.radar-heading{position:absolute;left:0;right:0;top:36px;text-align:center;font-size:7px;color:#75ff9a99;letter-spacing:2px}
-.radar-sweep{position:absolute;inset:0;border-radius:50%;background:conic-gradient(from 0deg,transparent 0deg,transparent 300deg,#53eaff08 322deg,#53eaff38 350deg,#53eaffaa 359deg,transparent 360deg);animation:radarSpin 3s linear infinite}
-@keyframes radarSpin{to{transform:rotate(360deg)}}
-.radar-center{position:absolute;left:calc(50% - 4px);top:calc(50% - 4px);width:8px;height:8px;background:#38d9ff;border-radius:50%;box-shadow:0 0 10px #53eaff}
-.radar-rocket{position:absolute;left:69%;top:30%;font-size:15px;transform:rotate(-35deg);filter:drop-shadow(0 0 5px #ff425d);animation:rocketPing 1.8s ease-in-out infinite}
-.radar-blip{position:absolute;width:4px;height:4px;border-radius:50%;background:#75ff9a;box-shadow:0 0 7px #75ff9a;animation:blip 1.6s ease-in-out infinite}
-.blip-one{left:30%;top:35%}.blip-two{left:65%;top:70%;animation-delay:.6s}.blip-three{left:24%;top:68%;animation-delay:1s}
-@keyframes blip{0%,100%{opacity:.3;transform:scale(.7)}50%{opacity:1;transform:scale(1.5)}}
-@keyframes rocketPing{0%,100%{opacity:.55}50%{opacity:1}}
-.radar-label{position:absolute;left:0;right:0;top:8px;text-align:center;font-size:8px;letter-spacing:1.5px;color:#53eaff;text-shadow:0 0 6px #53eaff}
-.radar-coords{position:absolute;bottom:8px;left:0;right:0;text-align:center;font-size:7px;letter-spacing:1px;color:#75ff9a}
-@media(max-width:500px){#rocket-radar{width:210px;height:210px;right:10px;bottom:10px;opacity:.96}.radar-label{top:12px}.radar-coords{bottom:11px}}
-@media(prefers-reduced-motion:reduce){#matrix-rain,.radar-sweep{display:none}}
-
 /* Dark-web inspired boot screen */
 #boot-screen{position:fixed;inset:0;z-index:9999;display:grid;place-items:center;background:#030405;color:#75ff9a;transition:opacity .55s ease,visibility .55s ease}
 #boot-screen.boot-hidden{opacity:0;visibility:hidden;pointer-events:none}
@@ -80,46 +55,6 @@ body:has(#matrix-rain) main{position:relative;z-index:3}
 .ai-foot{display:flex;justify-content:space-between;gap:10px;color:#40594c;font-size:8px;margin-top:9px;letter-spacing:.08em}
 @media(max-width:500px){.ai-controls button{padding:0 10px}.ai-messages{height:200px}}
 
-/* FINAL RADAR POSITION FIX: permanently pinned to viewport bottom-right */
-#rocket-radar{
-  position:fixed !important;
-  right:16px !important;
-  bottom:16px !important;
-  left:auto !important;
-  top:auto !important;
-  transform:none !important;
-  z-index:9998 !important;
-  pointer-events:none !important;
-}
-@media(max-width:500px){
-  #rocket-radar{
-    right:10px !important;
-    bottom:10px !important;
-    left:auto !important;
-    top:auto !important;
-    width:210px !important;
-    height:210px !important;
-  }
-}
-
-
-/* Hard override: radar is viewport-fixed, never document-flow positioned */
-html body > #rocket-radar{
-  position:fixed !important;
-  inset:auto 16px 16px auto !important;
-  margin:0 !important;
-  transform:none !important;
-  z-index:2147483000 !important;
-  float:none !important;
-  display:block !important;
-}
-@media(max-width:500px){
-  html body > #rocket-radar{
-    inset:auto 10px 10px auto !important;
-    width:210px !important;
-    height:210px !important;
-  }
-}
 /* J.A.R.V.I.S.-inspired personal assistant interface */
 :root{--arc:#70eaff;--arc2:#c7f7ff}
 #jarvis-launch{position:fixed;left:18px;bottom:18px;z-index:9997;width:64px;height:64px;border:1px solid #70eaff99;border-radius:50%;background:radial-gradient(circle,#123444,#03080d 70%);color:var(--arc2);box-shadow:0 0 22px #38d9ff35,inset 0 0 16px #38d9ff24;cursor:pointer;display:grid;place-items:center}
@@ -169,7 +104,7 @@ body:before{background:repeating-linear-gradient(0deg,transparent 0 3px,#70eaff 
 #rocket-radar{right:16px!important;bottom:16px!important;left:auto!important;top:auto!important;position:fixed!important;pointer-events:none!important}
 </style>
 </head>
-<body><div id="boot-screen" aria-label="Loading OBSIDIAN" role="status"><div class="boot-box"><div class="boot-logo">◈ <span>OBSIDIAN</span></div><div class="boot-sub">DEEP NETWORK INTERFACE // BUILD 2099</div><div class="boot-log"><div>Initializing encrypted session</div><div>Loading visual modules</div><div>Connecting to local simulation</div><div>Security sandbox verified</div></div><div class="boot-track"><i></i></div><div class="boot-bottom"><span>BOOT SEQUENCE</span><span id="boot-percent">LOADING...</span></div></div></div><canvas id="matrix-rain" aria-hidden="true"></canvas><div id="rocket-radar" aria-hidden="true"><div class="radar-sweep"></div><div class="radar-diag"></div><div class="radar-cross"></div><div class="radar-ring"></div><div class="radar-center"></div><span class="radar-rocket">🚀</span><i class="radar-blip blip-one"></i><i class="radar-blip blip-two"></i><i class="radar-blip blip-three"></i><div class="radar-label">DARKNET RADAR</div><div class="radar-heading">RANGE 04 · SCANNING</div><div class="radar-range">360°</div><div class="radar-coords">TRACKING · 04 SIGNALS</div></div><main>
+<body><div id="boot-screen" aria-label="Loading OBSIDIAN" role="status"><div class="boot-box"><div class="boot-logo">◈ <span>OBSIDIAN</span></div><div class="boot-sub">DEEP NETWORK INTERFACE // BUILD 2099</div><div class="boot-log"><div>Initializing encrypted session</div><div>Loading visual modules</div><div>Connecting to local simulation</div><div>Security sandbox verified</div></div><div class="boot-track"><i></i></div><div class="boot-bottom"><span>BOOT SEQUENCE</span><span id="boot-percent">LOADING...</span></div></div></div><canvas id="matrix-rain" aria-hidden="true"></canvas><main>
 <header class="top"><div class="brand">◈ <b>OBSIDIAN</b> // CYBER OPS</div><div class="topright"><span class="live">● SHADOW NODE ACTIVE</span><br><span id="clock">00:00:00</span> UTC+LOCAL · SESSION 0xA7</div></header>
 <section class="hero"><div><div class="eyebrow">DEEP NETWORK ACCESS / NODE 0x0A</div><h1>CYBER <span>OPERATIONS</span></h1><p class="subtitle">A shadowy, fictional deep-network terminal with encrypted logs, simulated node scans and a rotating signal radar. All activity is local visual simulation — no real systems or networks are accessed.</p></div><div class="warning">⚠ SANDBOX MODE // SIMULATED EVENTS ONLY</div></section>
 <section class="stats"><div class="stat"><label>SIMULATED THREAT LEVEL</label><strong class="red" id="threat">ELEVATED</strong></div><div class="stat"><label>VIRTUAL NODES</label><strong>04 <span class="green">/ 04</span></strong></div><div class="stat"><label>PACKETS ANALYZED</label><strong id="packets">008,421</strong></div><div class="stat"><label>ENCRYPTION</label><strong class="green">AES-256</strong></div></section>
@@ -216,25 +151,6 @@ setInterval(drawMatrix,55);
 const boot=document.getElementById('boot-screen'),bootPercent=document.getElementById('boot-percent');
 let bootN=0;const bootTimer=setInterval(()=>{bootN=Math.min(100,bootN+Math.ceil(Math.random()*19));bootPercent.textContent=bootN+'%';if(bootN>=100)clearInterval(bootTimer)},180);
 window.addEventListener('load',()=>setTimeout(()=>boot.classList.add('boot-hidden'),1550));
-// Keep radar pinned to the viewport's bottom-right, independent of page scroll/layout.
-const fixedRadar=document.getElementById('rocket-radar');
-function pinRadar(){
-  if(!fixedRadar)return;
-  // Keep the radar as a direct body child so no panel/container can affect fixed positioning.
-  if(fixedRadar.parentElement!==document.body)document.body.appendChild(fixedRadar);
-  fixedRadar.style.setProperty('position','fixed','important');
-  fixedRadar.style.setProperty('inset',window.innerWidth<=500?'auto 10px 10px auto':'auto 16px 16px auto','important');
-  fixedRadar.style.setProperty('margin','0','important');
-  fixedRadar.style.setProperty('transform','none','important');
-  fixedRadar.style.setProperty('z-index','2147483000','important');
-  fixedRadar.style.setProperty('pointer-events','none','important');
-  fixedRadar.style.setProperty('width',window.innerWidth<=500?'210px':'280px','important');
-  fixedRadar.style.setProperty('height',window.innerWidth<=500?'210px':'280px','important');
-}
-pinRadar();
-window.addEventListener('resize',pinRadar,{passive:true});
-window.addEventListener('orientationchange',pinRadar,{passive:true});
-// Radar is a fictional visual display; no real objects are tracked.
 
 const jPanel=document.getElementById('jarvis-panel'),jLaunch=document.getElementById('jarvis-launch'),jMessages=document.getElementById('j-messages'),jForm=document.getElementById('j-form'),jInput=document.getElementById('j-input'),jSend=document.getElementById('j-send'),jStatus=document.getElementById('j-status'),jVoice=document.getElementById('j-voice'),jSpeak=document.getElementById('j-speak');
 let jVoiceOn=true;
