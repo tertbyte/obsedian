@@ -101,6 +101,40 @@ body:has(#matrix-rain) main{position:relative;z-index:3}
     height:210px !important;
   }
 }
+
+/* J.A.R.V.I.S.-inspired personal assistant interface */
+:root{--arc:#70eaff;--arc2:#c7f7ff}
+#jarvis-launch{position:fixed;left:18px;bottom:18px;z-index:9997;width:64px;height:64px;border:1px solid #70eaff99;border-radius:50%;background:radial-gradient(circle,#123444,#03080d 70%);color:var(--arc2);box-shadow:0 0 22px #38d9ff35,inset 0 0 16px #38d9ff24;cursor:pointer;display:grid;place-items:center}
+#jarvis-launch .j-core{width:23px;height:23px;border:2px solid var(--arc);border-radius:50%;box-shadow:0 0 12px var(--arc),inset 0 0 10px var(--arc);position:relative}
+#jarvis-launch .j-core:before,#jarvis-launch .j-core:after{content:"";position:absolute;background:var(--arc);opacity:.8}
+#jarvis-launch .j-core:before{width:42px;height:1px;left:-12px;top:9px}#jarvis-launch .j-core:after{height:42px;width:1px;top:-12px;left:9px}
+#jarvis-launch:after{content:"J.A.R.V.I.S.";position:absolute;top:70px;left:50%;transform:translateX(-50%);font-size:8px;letter-spacing:2px;color:var(--arc);white-space:nowrap}
+#jarvis-panel{position:fixed;left:18px;bottom:94px;z-index:9997;width:min(370px,calc(100vw - 36px));border:1px solid #70eaff66;background:linear-gradient(145deg,#06131bf5,#020509f8);box-shadow:0 0 35px #38d9ff18,0 15px 50px #000a;color:#c7f7ff;display:none}
+#jarvis-panel.open{display:block;animation:jOpen .22s ease-out}@keyframes jOpen{from{opacity:0;transform:translateY(8px) scale(.98)}to{opacity:1;transform:none}}
+.j-head{padding:13px 14px;border-bottom:1px solid #70eaff30;display:flex;justify-content:space-between;align-items:center;gap:10px}
+.j-title{font-size:11px;letter-spacing:2px;color:#c7f7ff}.j-status{font-size:8px;color:#70eaff;letter-spacing:1px;margin-top:4px}
+.j-close{border:1px solid #70eaff55;background:transparent;color:#70eaff;padding:3px 8px;cursor:pointer}
+.j-visual{height:112px;display:grid;place-items:center;position:relative;overflow:hidden;border-bottom:1px solid #70eaff1e;background:radial-gradient(ellipse,#0a2936 0%,#03080d 65%)}
+.j-orb{width:72px;height:72px;border-radius:50%;border:1px solid #70eaff;box-shadow:0 0 14px #70eaff55,inset 0 0 16px #70eaff66;position:relative;animation:jPulse 3s ease-in-out infinite}
+.j-orb:before,.j-orb:after{content:"";position:absolute;inset:8px;border:1px solid #70eaff99;border-radius:50%;transform:rotateX(65deg) rotate(35deg)}
+.j-orb:after{transform:rotateX(65deg) rotate(-35deg);inset:-4px}
+.j-orb span{position:absolute;inset:27px;background:#c7f7ff;border-radius:50%;box-shadow:0 0 16px #70eaff}
+.j-visual:before,.j-visual:after{content:"";position:absolute;width:85%;height:1px;background:linear-gradient(90deg,transparent,#70eaff77,transparent);left:7.5%}
+.j-visual:before{top:25%}.j-visual:after{bottom:25%}
+#jarvis-panel.listening .j-orb{animation:jListen .65s ease-in-out infinite alternate}
+@keyframes jPulse{50%{transform:scale(1.07);box-shadow:0 0 25px #70eaff88,inset 0 0 22px #70eaff88}}
+@keyframes jListen{to{transform:scale(1.16);box-shadow:0 0 32px #70eaff,inset 0 0 28px #70eaff}}
+.j-messages{padding:12px;max-height:180px;min-height:70px;overflow:auto;font-size:11px;line-height:1.7;color:#a2d8e3}
+.j-msg{white-space:pre-wrap;overflow-wrap:anywhere;margin-bottom:8px}.j-msg b{color:#70eaff;font-weight:500}
+.j-controls{display:flex;gap:7px;padding:0 12px 12px}
+.j-controls input{min-width:0;flex:1;background:#02070b;border:1px solid #254d5a;color:#c7f7ff;padding:10px;font:inherit;outline:none}
+.j-controls input:focus{border-color:#70eaff}
+.j-controls button{border:1px solid #70eaff88;background:#0a2936;color:#c7f7ff;padding:0 11px;font:inherit;cursor:pointer}
+.j-actions{display:flex;justify-content:space-between;gap:8px;padding:0 12px 12px}
+.j-actions button{background:transparent;border:1px solid #254d5a;color:#70eaff;padding:7px 10px;font:inherit;font-size:9px;letter-spacing:1px;cursor:pointer}
+.j-actions button:disabled{opacity:.4}
+.j-foot{padding:8px 12px;border-top:1px solid #70eaff22;color:#4f8593;font-size:8px;letter-spacing:1px;display:flex;justify-content:space-between}
+@media(max-width:500px){#jarvis-launch{left:12px;bottom:12px;width:56px;height:56px}#jarvis-panel{left:10px;bottom:80px;width:calc(100vw - 20px)}}
 </style>
 </head>
 <body><div id="boot-screen" aria-label="Loading OBSIDIAN" role="status"><div class="boot-box"><div class="boot-logo">◈ <span>OBSIDIAN</span></div><div class="boot-sub">DEEP NETWORK INTERFACE // BUILD 2099</div><div class="boot-log"><div>Initializing encrypted session</div><div>Loading visual modules</div><div>Connecting to local simulation</div><div>Security sandbox verified</div></div><div class="boot-track"><i></i></div><div class="boot-bottom"><span>BOOT SEQUENCE</span><span id="boot-percent">LOADING...</span></div></div></div><canvas id="matrix-rain" aria-hidden="true"></canvas><div id="rocket-radar" aria-hidden="true"><div class="radar-sweep"></div><div class="radar-diag"></div><div class="radar-cross"></div><div class="radar-ring"></div><div class="radar-center"></div><span class="radar-rocket">🚀</span><i class="radar-blip blip-one"></i><i class="radar-blip blip-two"></i><i class="radar-blip blip-three"></i><div class="radar-label">DARKNET RADAR</div><div class="radar-heading">RANGE 04 · SCANNING</div><div class="radar-range">360°</div><div class="radar-coords">TRACKING · 04 SIGNALS</div></div><main>
@@ -112,6 +146,17 @@ body:has(#matrix-rain) main{position:relative;z-index:3}
 <section class="ai-panel"><div class="ai-head"><span>◈ OBSIDIAN AI // INTELLIGENCE CORE</span><span class="ai-badge" id="ai-state">WAITING FOR INPUT</span></div><div class="ai-body"><p class="ai-intro">Ask the onboard AI about coding, the interface, cybersecurity concepts, or your next build. Responses are generated by an AI model through a protected server endpoint.</p><div class="ai-messages" id="ai-messages" aria-live="polite"><div class="ai-msg bot">[OBSIDIAN AI ONLINE]\nIntelligence core initialized. What are we working on?</div></div><form class="ai-controls" id="ai-form"><input id="ai-input" autocomplete="off" maxlength="2000" placeholder="Message the intelligence core..." aria-label="Message OBSIDIAN AI" required><button id="ai-send" type="submit">SEND ↗</button></form><div class="ai-shortcuts"><button type="button" data-ai="Explain how this cyber terminal works.">EXPLAIN TERMINAL</button><button type="button" data-ai="Teach me cybersecurity basics safely.">CYBER BASICS</button><button type="button" data-ai="Suggest a new feature for OBSIDIAN.">UPGRADE IDEAS</button></div><div class="ai-foot"><span>AI-GENERATED · VERIFY IMPORTANT INFO</span><span>NO LIVE TARGET ACCESS</span></div></div></section>
 <footer class="bottom"><span>OBSIDIAN // FICTIONAL DEEP NETWORK</span><span>STAY CURIOUS. STAY ETHICAL.</span></footer>
 </main>
+
+<button id="jarvis-launch" type="button" aria-label="Open JARVIS assistant" title="Open J.A.R.V.I.S."><span class="j-core"></span></button>
+<section id="jarvis-panel" aria-label="JARVIS personal assistant">
+  <header class="j-head"><div><div class="j-title">◈ J.A.R.V.I.S. / PERSONAL AI</div><div class="j-status" id="j-status">SYSTEMS READY · WAITING</div></div><button class="j-close" id="j-close" aria-label="Close assistant">×</button></header>
+  <div class="j-visual"><div class="j-orb"><span></span></div></div>
+  <div class="j-messages" id="j-messages"><div class="j-msg"><b>JARVIS:</b> Good evening. Your personal interface is online. How may I assist?</div></div>
+  <form class="j-controls" id="j-form"><input id="j-input" maxlength="2000" autocomplete="off" placeholder="Ask me anything..." aria-label="Message JARVIS" required><button id="j-send" type="submit">SEND</button></form>
+  <div class="j-actions"><button id="j-voice" type="button">◉ VOICE INPUT</button><button id="j-speak" type="button">VOICE: ON</button><button id="j-clear" type="button">CLEAR</button></div>
+  <div class="j-foot"><span>AI ASSISTANT</span><span>SECURE SERVER ENDPOINT</span></div>
+</section>
+
 <script>
 const out=document.getElementById('output'),form=document.getElementById('form'),input=document.getElementById('command');let breached=false,defense=false;
 const scripts={
@@ -147,4 +192,17 @@ let bootN=0;const bootTimer=setInterval(()=>{bootN=Math.min(100,bootN+Math.ceil(
 window.addEventListener('load',()=>setTimeout(()=>boot.classList.add('boot-hidden'),1550));
 // Radar stays anchored in the bottom-right corner; no drag handlers.
 // Radar is a fictional visual display; no real objects are tracked.
+
+const jPanel=document.getElementById('jarvis-panel'),jLaunch=document.getElementById('jarvis-launch'),jMessages=document.getElementById('j-messages'),jForm=document.getElementById('j-form'),jInput=document.getElementById('j-input'),jSend=document.getElementById('j-send'),jStatus=document.getElementById('j-status'),jVoice=document.getElementById('j-voice'),jSpeak=document.getElementById('j-speak');
+let jVoiceOn=true;
+jLaunch.addEventListener('click',()=>{jPanel.classList.toggle('open');if(jPanel.classList.contains('open'))jInput.focus()});
+document.getElementById('j-close').addEventListener('click',()=>jPanel.classList.remove('open'));
+document.getElementById('j-clear').addEventListener('click',()=>{jMessages.innerHTML='<div class="j-msg"><b>JARVIS:</b> Conversation cleared. I am ready.</div>';});
+jSpeak.addEventListener('click',()=>{jVoiceOn=!jVoiceOn;jSpeak.textContent='VOICE: '+(jVoiceOn?'ON':'OFF');if(!jVoiceOn&&'speechSynthesis'in window)speechSynthesis.cancel()});
+function jAdd(text,who){const el=document.createElement('div');el.className='j-msg';const b=document.createElement('b');b.textContent=who==='user'?'YOU: ':'JARVIS: ';el.appendChild(b);el.appendChild(document.createTextNode(text));jMessages.appendChild(el);jMessages.scrollTop=jMessages.scrollHeight;return el}
+function jSay(text){if(!jVoiceOn||!('speechSynthesis'in window))return;speechSynthesis.cancel();const u=new SpeechSynthesisUtterance(text);u.rate=1.02;u.pitch=.88;speechSynthesis.speak(u)}
+async function jAsk(message){if(!message.trim())return;jAdd(message,'user');jInput.value='';jSend.disabled=true;jStatus.textContent='THINKING · PROCESSING';jPanel.classList.remove('listening');const pending=jAdd('One moment, I am processing your request…','bot');try{const res=await fetch('/api/chat',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({message:'You are JARVIS, a polished, concise, courteous futuristic personal AI assistant inspired by cinematic AI assistants. Call the user “sir” only occasionally. Help with general questions, coding, and the OBSIDIAN website. Be honest about capabilities.\nUser: '+message})});const data=await res.json();if(!res.ok)throw new Error(data.error||'AI endpoint unavailable');const reply=data.reply||'I did not receive a response.';pending.lastChild.textContent=reply;jStatus.textContent='ONLINE · READY';jSay(reply)}catch(err){pending.lastChild.textContent='Connection unavailable: '+err.message+'. Check that OPENAI_API_KEY is configured in Vercel and redeploy.';jStatus.textContent='CONNECTION ISSUE'}finally{jSend.disabled=false;jInput.focus()}}
+jForm.addEventListener('submit',e=>{e.preventDefault();jAsk(jInput.value)});
+const SpeechRecognition=window.SpeechRecognition||window.webkitSpeechRecognition;
+jVoice.addEventListener('click',()=>{if(!SpeechRecognition){jStatus.textContent='VOICE INPUT NOT SUPPORTED';jAdd('Voice input is not supported in this browser. Try Chrome, or type your message.','bot');return}const rec=new SpeechRecognition();rec.lang='en-US';rec.interimResults=false;rec.maxAlternatives=1;jPanel.classList.add('listening');jStatus.textContent='LISTENING · SPEAK NOW';rec.onresult=e=>{jInput.value=e.results[0][0].transcript;jAsk(jInput.value)};rec.onerror=()=>{jPanel.classList.remove('listening');jStatus.textContent='VOICE INPUT UNAVAILABLE'};rec.onend=()=>{jPanel.classList.remove('listening');if(jStatus.textContent.startsWith('LISTENING'))jStatus.textContent='ONLINE · READY'};try{rec.start()}catch(e){jPanel.classList.remove('listening');jStatus.textContent='VOICE INPUT UNAVAILABLE'}});
 </script></body></html>
