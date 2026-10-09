@@ -18,10 +18,18 @@ main{max-width:1240px;margin:auto;padding:18px}.top{display:flex;justify-content
 #rocket-layer{position:fixed;inset:0;pointer-events:none;z-index:2;overflow:hidden}
 
 body:has(#matrix-rain) main{position:relative;z-index:3}
-#rocket-radar{position:fixed;right:18px;bottom:18px;width:164px;height:164px;border:1px solid #53eaff88;border-radius:50%;z-index:8;pointer-events:none;background:radial-gradient(circle,#06251c99 0%,#06110de8 72%);box-shadow:0 0 22px #53eaff18,inset 0 0 20px #53eaff12;overflow:hidden}
-#rocket-radar:before{content:"";position:absolute;inset:15%;border:1px solid #53eaff55;border-radius:50%;box-shadow:0 0 0 17px #53eaff0a,0 0 0 34px #53eaff08}
-#rocket-radar:after{content:"";position:absolute;left:50%;top:0;width:1px;height:100%;background:#53eaff30;box-shadow:0 0 0 0 #53eaff20}
-.radar-cross{position:absolute;left:0;top:50%;width:100%;height:1px;background:#53eaff30}
+#rocket-radar{position:fixed;right:22px;bottom:22px;width:280px;height:280px;border:1px solid #53eaffaa;border-radius:50%;z-index:8;pointer-events:none;background:radial-gradient(circle,#06251cdd 0%,#06110df2 72%);box-shadow:0 0 32px #53eaff24,inset 0 0 30px #53eaff18;overflow:hidden}
+#rocket-radar:before{content:"";position:absolute;inset:12%;border:1px solid #53eaff66;border-radius:50%;box-shadow:0 0 0 24px #53eaff0b,0 0 0 48px #53eaff09}
+#rocket-radar:after{content:"";position:absolute;left:50%;top:0;width:1px;height:100%;background:#53eaff45}
+#rocket-radar .radar-ring{position:absolute;inset:29%;border:1px solid #53eaff44;border-radius:50%}
+#rocket-radar .radar-diag{position:absolute;inset:0;background:linear-gradient(45deg,transparent 49.8%,#53eaff2a 50%,transparent 50.2%),linear-gradient(-45deg,transparent 49.8%,#53eaff2a 50%,transparent 50.2%)}
+.radar-cross{position:absolute;left:0;top:50%;width:100%;height:1px;background:#53eaff45}
+.radar-sweep{mix-blend-mode:screen}
+.radar-rocket{font-size:20px}
+.radar-label{top:18px;font-size:10px}
+.radar-coords{bottom:16px;font-size:8px}
+.radar-range{position:absolute;right:18px;top:50%;font-size:7px;color:#53eaff99;letter-spacing:1px}
+.radar-heading{position:absolute;left:0;right:0;top:36px;text-align:center;font-size:7px;color:#75ff9a99;letter-spacing:2px}
 .radar-sweep{position:absolute;inset:0;border-radius:50%;background:conic-gradient(from 0deg,transparent 0deg,transparent 300deg,#53eaff08 322deg,#53eaff38 350deg,#53eaffaa 359deg,transparent 360deg);animation:radarSpin 3s linear infinite}
 @keyframes radarSpin{to{transform:rotate(360deg)}}
 .radar-center{position:absolute;left:calc(50% - 4px);top:calc(50% - 4px);width:8px;height:8px;background:#53eaff;border-radius:50%;box-shadow:0 0 10px #53eaff}
@@ -32,11 +40,11 @@ body:has(#matrix-rain) main{position:relative;z-index:3}
 @keyframes rocketPing{0%,100%{opacity:.55}50%{opacity:1}}
 .radar-label{position:absolute;left:0;right:0;top:8px;text-align:center;font-size:8px;letter-spacing:1.5px;color:#53eaff;text-shadow:0 0 6px #53eaff}
 .radar-coords{position:absolute;bottom:8px;left:0;right:0;text-align:center;font-size:7px;letter-spacing:1px;color:#75ff9a}
-@media(max-width:500px){#rocket-radar{width:118px;height:118px;right:10px;bottom:10px;opacity:.9}}
+@media(max-width:500px){#rocket-radar{width:210px;height:210px;right:10px;bottom:10px;opacity:.96}.radar-label{top:12px}.radar-coords{bottom:11px}}
 @media(prefers-reduced-motion:reduce){#matrix-rain,.radar-sweep{display:none}}
 </style>
 </head>
-<body><canvas id="matrix-rain" aria-hidden="true"></canvas><div id="rocket-radar" aria-hidden="true"><div class="radar-sweep"></div><div class="radar-cross"></div><div class="radar-center"></div><span class="radar-rocket">🚀</span><i class="radar-blip blip-one"></i><i class="radar-blip blip-two"></i><i class="radar-blip blip-three"></i><div class="radar-label">ROCKET RADAR</div><div class="radar-coords">TRACKING · 04 SIGNALS</div></div><main>
+<body><canvas id="matrix-rain" aria-hidden="true"></canvas><div id="rocket-radar" aria-hidden="true"><div class="radar-sweep"></div><div class="radar-diag"></div><div class="radar-cross"></div><div class="radar-ring"></div><div class="radar-center"></div><span class="radar-rocket">🚀</span><i class="radar-blip blip-one"></i><i class="radar-blip blip-two"></i><i class="radar-blip blip-three"></i><div class="radar-label">TACTICAL RADAR</div><div class="radar-heading">RANGE 04 · SCANNING</div><div class="radar-range">360°</div><div class="radar-coords">TRACKING · 04 SIGNALS</div></div><main>
 <header class="top"><div class="brand">◈ <b>OBSIDIAN</b> // CYBER OPS</div><div class="topright"><span class="live">● SIMULATION ACTIVE</span><br><span id="clock">00:00:00</span> UTC+LOCAL · SESSION 0xA7</div></header>
 <section class="hero"><div><div class="eyebrow">TACTICAL INTERFACE / BUILD 2099.10</div><h1>CYBER <span>OPERATIONS</span></h1><p class="subtitle">A cinematic, fictional cyber-attack command center. Run simulated recon, breach sequences, packet traces and system diagnostics — no real targets, networks or devices are accessed.</p></div><div class="warning">⚠ SANDBOX MODE // SIMULATED EVENTS ONLY</div></section>
 <section class="stats"><div class="stat"><label>SIMULATED THREAT LEVEL</label><strong class="red" id="threat">ELEVATED</strong></div><div class="stat"><label>VIRTUAL NODES</label><strong>04 <span class="green">/ 04</span></strong></div><div class="stat"><label>PACKETS ANALYZED</label><strong id="packets">008,421</strong></div><div class="stat"><label>ENCRYPTION</label><strong class="green">AES-256</strong></div></section>
