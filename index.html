@@ -19,8 +19,8 @@ main{max-width:1240px;margin:auto;padding:18px}.top{display:flex;justify-content
 #rocket-layer{position:fixed;inset:0;pointer-events:none;z-index:2;overflow:hidden}
 
 body:has(#matrix-rain) main{position:relative;z-index:3}
-#rocket-radar{position:fixed;right:22px;bottom:22px;width:280px;height:280px;border:1px solid #53eaffaa;border-radius:50%;z-index:8;pointer-events:none;background:radial-gradient(circle,#06120af5 0%,#020303fa 72%);box-shadow:0 0 32px #53eaff24,inset 0 0 30px #53eaff18;overflow:hidden}
-#rocket-radar:before{content:"";position:absolute;inset:12%;border:1px solid #53eaff66;border-radius:50%;box-shadow:0 0 0 24px #53eaff0b,0 0 0 48px #53eaff09}
+#rocket-radar{position:fixed;right:22px;bottom:22px;width:280px;height:280px;border:1px solid #53eaffaa;border-radius:50%;z-index:8;pointer-events:auto;cursor:grab;touch-action:none;user-select:none;background:radial-gradient(circle,#06120af5 0%,#020303fa 72%);box-shadow:0 0 32px #53eaff24,inset 0 0 30px #53eaff18;overflow:hidden}
+#rocket-radar:active{cursor:grabbing}#rocket-radar:before{content:"";position:absolute;inset:12%;border:1px solid #53eaff66;border-radius:50%;box-shadow:0 0 0 24px #53eaff0b,0 0 0 48px #53eaff09}
 #rocket-radar:after{content:"";position:absolute;left:50%;top:0;width:1px;height:100%;background:#53eaff45}
 #rocket-radar .radar-ring{position:absolute;inset:29%;border:1px solid #53eaff44;border-radius:50%}
 #rocket-radar .radar-diag{position:absolute;inset:0;background:linear-gradient(45deg,transparent 49.8%,#53eaff2a 50%,transparent 50.2%),linear-gradient(-45deg,transparent 49.8%,#53eaff2a 50%,transparent 50.2%)}
@@ -123,5 +123,10 @@ document.querySelectorAll('[data-ai]').forEach(b=>b.addEventListener('click',()=
 const boot=document.getElementById('boot-screen'),bootPercent=document.getElementById('boot-percent');
 let bootN=0;const bootTimer=setInterval(()=>{bootN=Math.min(100,bootN+Math.ceil(Math.random()*19));bootPercent.textContent=bootN+'%';if(bootN>=100)clearInterval(bootTimer)},180);
 window.addEventListener('load',()=>setTimeout(()=>boot.classList.add('boot-hidden'),1550));
+// Drag the radar around the viewport with mouse or touch.
+const radar=document.getElementById('rocket-radar');let dragging=false,dragOffsetX=0,dragOffsetY=0;
+radar.addEventListener('pointerdown',e=>{dragging=true;const rect=radar.getBoundingClientRect();dragOffsetX=e.clientX-rect.left;dragOffsetY=e.clientY-rect.top;radar.setPointerCapture(e.pointerId);radar.style.right='auto';radar.style.bottom='auto';radar.style.left=rect.left+'px';radar.style.top=rect.top+'px';e.preventDefault()});
+radar.addEventListener('pointermove',e=>{if(!dragging)return;const maxX=innerWidth-radar.offsetWidth,maxY=innerHeight-radar.offsetHeight;radar.style.left=Math.max(0,Math.min(maxX,e.clientX-dragOffsetX))+'px';radar.style.top=Math.max(0,Math.min(maxY,e.clientY-dragOffsetY))+'px'});
+function stopRadarDrag(){dragging=false}radar.addEventListener('pointerup',stopRadarDrag);radar.addEventListener('pointercancel',stopRadarDrag);
 // Radar is a fictional visual display; no real objects are tracked.
 </script></body></html>
