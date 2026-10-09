@@ -1,0 +1,40 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="theme-color" content="#030405">
+<title>404 // SIGNAL LOST — OBSIDIAN</title>
+<style>
+:root{--green:#75ff9a;--cyan:#53eaff;--red:#ff425d;--muted:#527063}
+*{box-sizing:border-box}html,body{margin:0;min-height:100%;background:#030405;color:var(--green);font:13px/1.6 ui-monospace,SFMono-Regular,Menlo,Consolas,monospace}
+body{min-height:100vh;display:grid;place-items:center;overflow:hidden;background:radial-gradient(ellipse at 50% 45%,#10251c 0,#030405 68%)}
+body:before{content:"";position:fixed;inset:0;pointer-events:none;opacity:.12;background:repeating-linear-gradient(0deg,transparent 0 3px,#75ff9a 4px)}
+#rain{position:fixed;inset:0;width:100%;height:100%;opacity:.18;pointer-events:none}
+main{position:relative;z-index:1;width:min(680px,90vw);padding:clamp(20px,5vw,42px);border:1px solid #244334;background:#050807eF;box-shadow:0 0 60px #00ff6610}
+.brand{font-weight:900;letter-spacing:.22em;color:#f2fff6}.brand b{color:var(--green)}.status{float:right;color:var(--red);font-size:9px;letter-spacing:.12em}
+.rule{height:1px;background:#1a3829;margin:20px 0}
+.code{font-size:clamp(66px,18vw,130px);font-weight:900;line-height:1;letter-spacing:-.08em;color:#f2fff6;text-shadow:3px 0 var(--red),-3px 0 var(--cyan);animation:glitch 3s steps(1) infinite}
+h1{margin:14px 0 5px;font-size:clamp(17px,4vw,24px);letter-spacing:.18em}
+p{color:#85a996;max-width:480px}.log{margin:22px 0;padding:12px;border-left:2px solid var(--red);background:#ff425d08;color:#7c9b88;font-size:11px}.log span{color:var(--red)}
+a{display:inline-block;text-decoration:none;margin:6px 8px 0 0;padding:10px 14px;border:1px solid var(--green);color:#031008;background:var(--green);font-weight:800;font-size:10px;letter-spacing:.12em}a.secondary{color:var(--cyan);background:transparent;border-color:#275260}
+footer{margin-top:26px;display:flex;justify-content:space-between;gap:12px;color:var(--muted);font-size:8px;letter-spacing:.12em}
+@keyframes glitch{0%,94%,100%{transform:none;clip-path:none}95%{transform:translateX(3px);clip-path:inset(15% 0 60% 0)}97%{transform:translateX(-3px);clip-path:inset(55% 0 18% 0)}}
+@media(prefers-reduced-motion:reduce){.code{animation:none}}
+</style>
+</head>
+<body><canvas id="rain" aria-hidden="true"></canvas><main>
+<div class="brand">◈ <b>OBSIDIAN</b> // CYBER OPS <span class="status">● SIGNAL LOST</span></div>
+<div class="rule"></div>
+<div class="code">404</div>
+<h1>YOU HAVE LEFT THE NETWORK.</h1>
+<p>The requested route does not exist in this node. The signal ends here — return to the main interface or retry the address.</p>
+<div class="log"><span>[ERR_404]</span> ROUTE_NOT_FOUND<br><span>[TRACE]</span> PACKET DESTINATION UNKNOWN<br><span>[STATUS]</span> YOUR SESSION IS SAFE · NO CONNECTION WAS MADE</div>
+<a href="/">↳ RETURN TO TERMINAL</a><a class="secondary" href="javascript:location.reload()">RETRY SIGNAL</a>
+<footer><span>OBSIDIAN LABS // NODE 0x404</span><span>FICTIONAL INTERFACE · 2099</span></footer>
+</main>
+<script>
+const c=document.getElementById('rain'),x=c.getContext('2d'),chars='01ABCDEFGHIJKLMNOPQRSTUVWXYZ#$%';let drops=[],size=14;
+function resize(){c.width=innerWidth;c.height=innerHeight;drops=Array(Math.ceil(c.width/size)).fill(1)}addEventListener('resize',resize);resize();
+setInterval(()=>{x.fillStyle='rgba(3,4,5,.12)';x.fillRect(0,0,c.width,c.height);x.font=size+'px monospace';drops.forEach((y,i)=>{x.fillStyle=Math.random()>.92?'#53eaff':'#75ff9a';x.fillText(chars[Math.floor(Math.random()*chars.length)],i*size,y*size);if(y*size>c.height&&Math.random()>.97)drops[i]=0;drops[i]++})},65);
+</script></body></html>
