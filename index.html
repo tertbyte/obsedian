@@ -102,6 +102,24 @@ body:has(#matrix-rain) main{position:relative;z-index:3}
   }
 }
 
+
+/* Hard override: radar is viewport-fixed, never document-flow positioned */
+html body > #rocket-radar{
+  position:fixed !important;
+  inset:auto 16px 16px auto !important;
+  margin:0 !important;
+  transform:none !important;
+  z-index:2147483000 !important;
+  float:none !important;
+  display:block !important;
+}
+@media(max-width:500px){
+  html body > #rocket-radar{
+    inset:auto 10px 10px auto !important;
+    width:210px !important;
+    height:210px !important;
+  }
+}
 /* J.A.R.V.I.S.-inspired personal assistant interface */
 :root{--arc:#70eaff;--arc2:#c7f7ff}
 #jarvis-launch{position:fixed;left:18px;bottom:18px;z-index:9997;width:64px;height:64px;border:1px solid #70eaff99;border-radius:50%;background:radial-gradient(circle,#123444,#03080d 70%);color:var(--arc2);box-shadow:0 0 22px #38d9ff35,inset 0 0 16px #38d9ff24;cursor:pointer;display:grid;place-items:center}
@@ -202,13 +220,13 @@ window.addEventListener('load',()=>setTimeout(()=>boot.classList.add('boot-hidde
 const fixedRadar=document.getElementById('rocket-radar');
 function pinRadar(){
   if(!fixedRadar)return;
+  // Keep the radar as a direct body child so no panel/container can affect fixed positioning.
+  if(fixedRadar.parentElement!==document.body)document.body.appendChild(fixedRadar);
   fixedRadar.style.setProperty('position','fixed','important');
-  fixedRadar.style.setProperty('right',window.innerWidth<=500?'10px':'16px','important');
-  fixedRadar.style.setProperty('bottom',window.innerWidth<=500?'10px':'16px','important');
-  fixedRadar.style.setProperty('left','auto','important');
-  fixedRadar.style.setProperty('top','auto','important');
+  fixedRadar.style.setProperty('inset',window.innerWidth<=500?'auto 10px 10px auto':'auto 16px 16px auto','important');
+  fixedRadar.style.setProperty('margin','0','important');
   fixedRadar.style.setProperty('transform','none','important');
-  fixedRadar.style.setProperty('z-index','9998','important');
+  fixedRadar.style.setProperty('z-index','2147483000','important');
   fixedRadar.style.setProperty('pointer-events','none','important');
   fixedRadar.style.setProperty('width',window.innerWidth<=500?'210px':'280px','important');
   fixedRadar.style.setProperty('height',window.innerWidth<=500?'210px':'280px','important');
